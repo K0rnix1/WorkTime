@@ -1,7 +1,7 @@
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
-/* eslint-disable no-restricted-globals */
+/* eslint-disable no-restricted-globals, @typescript-eslint/no-unused-expressions */
 
 // This service worker can be customized!
 // See https://developers.google.com/web/tools/workbox/modules
@@ -10,11 +10,8 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-// eslint-disable-next-line no-restricted-globals
-self.__WB_MANIFEST;
-
-// eslint-disable-next-line no-restricted-globals, no-undef
-const self: ServiceWorkerGlobalScope = globalThis as any;
+// @ts-ignore
+const MANIFEST = self.__WB_MANIFEST || [];
 
 // Add the custom service worker code here.
 // Your service worker here
