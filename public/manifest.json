@@ -1,6 +1,6 @@
 {
   "short_name": "WorkTime",
-  "name": "WorkTime - Time Tracking App",
+  "name": "WorkTime - Zeit Erfassung",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,7 +19,9 @@
     }
   ],
   "start_url": ".",
+  "scope": "/worktime/",
   "display": "standalone",
+  "orientation": "portrait",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 } 
