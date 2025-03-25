@@ -10,8 +10,8 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-// @ts-ignore
-const MANIFEST = self.__WB_MANIFEST || [];
+// In einer vollständigen Workbox-Konfiguration würde das Manifest verwendet werden.
+// Wir verwenden hier einen einfacheren Ansatz mit manueller Asset-Liste.
 
 // Add the custom service worker code here.
 // Your service worker here
