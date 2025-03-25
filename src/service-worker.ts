@@ -10,8 +10,9 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-// In einer vollständigen Workbox-Konfiguration würde das Manifest verwendet werden.
-// Wir verwenden hier einen einfacheren Ansatz mit manueller Asset-Liste.
+// Verwende das generierte WB_MANIFEST
+// @ts-ignore
+const additionalManifestEntries = self.__WB_MANIFEST;
 
 // Add the custom service worker code here.
 // Your service worker here
@@ -25,7 +26,9 @@ self.addEventListener('install', (event) => {
         '/manifest.json',
         '/favicon.ico',
         '/logo192.png',
-        '/logo512.png'
+        '/logo512.png',
+        // Füge auch die automatisch generierten Einträge hinzu, wenn vorhanden
+        ...(additionalManifestEntries || [])
       ]);
     })
   );
