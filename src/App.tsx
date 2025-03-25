@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Container, AppBar, Toolbar, Typography, Button, IconButton, 
   Box, Menu, MenuItem, Dialog, DialogTitle, DialogContent, 
-  DialogActions, Divider, ToggleButtonGroup, ToggleButton
+  DialogActions
 } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -284,7 +284,7 @@ function App() {
   // Speichern der Daten nach Änderungen
   useEffect(() => {
     saveToLocalStorage();
-  }, [isWorking, currentSession, timeEntries, language]);
+  }, [isWorking, currentSession, timeEntries, language, saveToLocalStorage]);
 
   // Sprache ändern
   const handleLanguageChange = (newLanguage: AppLanguage) => {
