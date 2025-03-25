@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Container, AppBar, Toolbar, Typography, Button, IconButton, 
   Box, Menu, MenuItem, Dialog, DialogTitle, DialogContent, 
@@ -265,12 +265,12 @@ function App() {
   const [aboutDialogOpen, setAboutDialogOpen] = useState<boolean>(false);
 
   // Speichere Daten im LocalStorage nach jeder Änderung
-  const saveToLocalStorage = () => {
+  const saveToLocalStorage = useCallback(() => {
     localStorage.setItem('isWorking', JSON.stringify(isWorking));
     localStorage.setItem('currentSession', JSON.stringify(currentSession));
     localStorage.setItem('timeEntries', JSON.stringify(timeEntries));
     localStorage.setItem('language', language);
-  };
+  }, [isWorking, currentSession, timeEntries, language]);
 
   // Aktualisiere die Zeit jede Sekunde
   useEffect(() => {
