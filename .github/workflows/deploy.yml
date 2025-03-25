@@ -41,6 +41,9 @@ jobs:
           ls -la build
           echo "Build status complete."
 
+      - name: Create .nojekyll file
+        run: touch build/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
