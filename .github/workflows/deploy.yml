@@ -33,7 +33,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build
-        run: CI=false npm run build
+        run: npm run build
 
       - name: Debug - Build Directory
         run: |
