@@ -392,7 +392,7 @@ function App() {
                 <InfoIcon sx={{ mr: 1 }} />
                 Über diese App
               </MenuItem>
-              <MenuItem onClick={() => { window.open('https://paypal.me/YOURID', '_blank'); handleMenuClose(); }}>
+              <MenuItem onClick={() => { window.open('https://paypal.me/K0rnix1', '_blank'); handleMenuClose(); }}>
                 <PaymentIcon sx={{ mr: 1 }} />
                 Unterstützen
               </MenuItem>
