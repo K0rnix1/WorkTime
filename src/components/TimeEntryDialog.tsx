@@ -7,17 +7,43 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { de } from 'date-fns/locale';
-import { TimeEntry } from '../App';
+import { Locale } from 'date-fns';
+import { TimeEntry, AppLanguage } from '../App';
+
+interface TimeEntryDialogTranslations {
+  edit: string;
+  new: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  breakDuration: string;
+  project: string;
+  notes: string;
+  workingTime: string;
+  cancel: string;
+  save: string;
+  required: string;
+}
 
 interface TimeEntryDialogProps {
   open: boolean;
   entry: TimeEntry | null;
   onClose: () => void;
   onSave: (entry: TimeEntry) => void;
+  language: AppLanguage;
+  translations: TimeEntryDialogTranslations;
+  dateLocale: Locale;
 }
 
-const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose, onSave }) => {
+const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ 
+  open, 
+  entry, 
+  onClose, 
+  onSave,
+  language,
+  translations: t,
+  dateLocale
+}) => {
   const [date, setDate] = useState<Date | null>(new Date());
   const [startTime, setStartTime] = useState<Date | null>(new Date());
   const [endTime, setEndTime] = useState<Date | null>(new Date());
@@ -55,11 +81,11 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
     const newErrors: {[key: string]: string} = {};
     
     if (!date) {
-      newErrors.date = 'Datum ist erforderlich';
+      newErrors.date = `${t.date} ${t.required}`;
     }
     
     if (!startTime) {
-      newErrors.startTime = 'Startzeit ist erforderlich';
+      newErrors.startTime = `${t.startTime} ${t.required}`;
     }
     
     if (Object.keys(newErrors).length > 0) {
@@ -111,15 +137,15 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
-        {entry ? 'Eintrag bearbeiten' : 'Neuer Eintrag'}
+        {entry ? t.edit : t.new}
       </DialogTitle>
       <DialogContent>
-        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={de}>
+        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={dateLocale}>
           <Grid container spacing={2} sx={{ mt: 1 }}>
             {/* Datum */}
             <Grid item xs={12}>
               <DatePicker
-                label="Datum"
+                label={t.date}
                 value={date}
                 onChange={(newDate) => setDate(newDate)}
                 slotProps={{
@@ -135,7 +161,7 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
             {/* Startzeit */}
             <Grid item xs={6}>
               <TimePicker
-                label="Startzeit"
+                label={t.startTime}
                 value={startTime}
                 onChange={(newTime) => setStartTime(newTime)}
                 slotProps={{
@@ -151,7 +177,7 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
             {/* Endzeit */}
             <Grid item xs={6}>
               <TimePicker
-                label="Endzeit"
+                label={t.endTime}
                 value={endTime}
                 onChange={(newTime) => setEndTime(newTime)}
                 slotProps={{
@@ -165,7 +191,7 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
             {/* Pausendauer */}
             <Grid item xs={12}>
               <TextField
-                label="Pausendauer (Minuten)"
+                label={t.breakDuration}
                 type="number"
                 fullWidth
                 value={breakDuration}
@@ -177,7 +203,7 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
             {/* Projekt */}
             <Grid item xs={12}>
               <TextField
-                label="Projekt"
+                label={t.project}
                 fullWidth
                 value={project}
                 onChange={(e) => setProject(e.target.value)}
@@ -187,7 +213,7 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
             {/* Notizen */}
             <Grid item xs={12}>
               <TextField
-                label="Notizen"
+                label={t.notes}
                 fullWidth
                 multiline
                 rows={3}
@@ -200,7 +226,7 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
             {startTime && endTime && (
               <Grid item xs={12}>
                 <Typography variant="body2" color="text.secondary">
-                  Arbeitszeit (ohne Pausen): {
+                  {t.workingTime} {
                     (() => {
                       const start = new Date(startTime);
                       const end = new Date(endTime);
@@ -223,9 +249,9 @@ const TimeEntryDialog: React.FC<TimeEntryDialogProps> = ({ open, entry, onClose,
         </LocalizationProvider>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Abbrechen</Button>
+        <Button onClick={onClose}>{t.cancel}</Button>
         <Button onClick={handleSave} variant="contained" color="primary">
-          Speichern
+          {t.save}
         </Button>
       </DialogActions>
     </Dialog>

@@ -5,22 +5,42 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { TimeEntry } from '../App';
+import { TimeEntry, AppLanguage } from '../App';
 import { format } from 'date-fns';
-import { de } from 'date-fns/locale';
+import { Locale } from 'date-fns';
+
+interface TimeListTranslations {
+  entries: string;
+  totalTime: string;
+  hours: string;
+  noEntries: string;
+  running: string;
+  pause: string;
+  workingTime: string;
+}
 
 interface TimeListProps {
   timeEntries: TimeEntry[];
   onEditEntry: (entry: TimeEntry) => void;
   onDeleteEntry: (id: string) => void;
+  language: AppLanguage;
+  translations: TimeListTranslations;
+  dateLocale: Locale;
 }
 
-const TimeList: React.FC<TimeListProps> = ({ timeEntries, onEditEntry, onDeleteEntry }) => {
+const TimeList: React.FC<TimeListProps> = ({ 
+  timeEntries, 
+  onEditEntry, 
+  onDeleteEntry,
+  language,
+  translations: t,
+  dateLocale
+}) => {
   if (timeEntries.length === 0) {
     return (
       <Box sx={{ width: '100%', mt: 2 }}>
         <Typography variant="subtitle1" align="center" color="text.secondary">
-          Keine Einträge vorhanden
+          {t.noEntries}
         </Typography>
       </Box>
     );
@@ -52,14 +72,16 @@ const TimeList: React.FC<TimeListProps> = ({ timeEntries, onEditEntry, onDeleteE
     entriesByDate[dateStr].push(entry);
   });
 
+  const dateFormat = language === 'de' ? 'eeee, dd. MMMM yyyy' : 'eeee, MMMM dd, yyyy';
+
   return (
     <Box sx={{ width: '100%', overflow: 'auto', flex: 1 }}>
       <Typography variant="h6" gutterBottom>
-        Einträge
+        {t.entries}
       </Typography>
       
       <Typography variant="subtitle1" gutterBottom color="primary">
-        Gesamtarbeitszeit: {totalWorkHours.toFixed(2)} Stunden
+        {t.totalTime} {totalWorkHours.toFixed(2)} {t.hours}
       </Typography>
       
       {Object.entries(entriesByDate).map(([dateStr, entries]) => (
@@ -68,7 +90,7 @@ const TimeList: React.FC<TimeListProps> = ({ timeEntries, onEditEntry, onDeleteE
             variant="subtitle1" 
             sx={{ p: 1, bgcolor: 'primary.dark', color: 'white' }}
           >
-            {format(new Date(dateStr), 'eeee, dd. MMMM yyyy', { locale: de })}
+            {format(new Date(dateStr), dateFormat, { locale: dateLocale })}
           </Typography>
           
           <List dense>
@@ -96,7 +118,7 @@ const TimeList: React.FC<TimeListProps> = ({ timeEntries, onEditEntry, onDeleteE
                       primary={
                         <>
                           <Typography component="span" fontWeight="bold">
-                            {format(entry.startTime, 'HH:mm')} - {entry.endTime ? format(entry.endTime, 'HH:mm') : 'läuft'}
+                            {format(entry.startTime, 'HH:mm')} - {entry.endTime ? format(entry.endTime, 'HH:mm') : t.running}
                           </Typography>
                           {entry.project && 
                             <Typography component="span" color="primary.light" sx={{ ml: 1 }}>
@@ -107,8 +129,8 @@ const TimeList: React.FC<TimeListProps> = ({ timeEntries, onEditEntry, onDeleteE
                       }
                       secondary={
                         <>
-                          {entry.breakDuration > 0 && `Pause: ${entry.breakDuration} Min. | `}
-                          Arbeitszeit: {workTimeStr}
+                          {entry.breakDuration > 0 && `${t.pause} ${entry.breakDuration} min. | `}
+                          {t.workingTime} {workTimeStr}
                           {entry.notes && (
                             <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
                               {entry.notes}
