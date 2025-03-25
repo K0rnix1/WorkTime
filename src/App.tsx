@@ -564,7 +564,7 @@ function App() {
                 <InfoIcon sx={{ mr: 1 }} />
                 {t.menu.about}
               </MenuItem>
-              <MenuItem onClick={() => { window.open('https://paypal.me/K0rnix1', '_blank'); handleMenuClose(); }}>
+              <MenuItem onClick={() => { window.open('https://paypal.me/c00kieme', '_blank'); handleMenuClose(); }}>
                 <PaymentIcon sx={{ mr: 1 }} />
                 {t.menu.support}
               </MenuItem>
