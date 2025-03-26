@@ -109,8 +109,8 @@ const translations = {
     },
     about: {
       title: 'Über WorkTime',
-      description1: 'Das ist eine App die ich gemacht habe um meine Arbeitszeit festzuhalten, ohne dass man jedesmal extra wo mitschreiben muss. Ich bin mir sicher, dass es schon so eine App gibt, aber wie es meistens so ist ist bei anderen Apps etwas zu zahlen oder man bekommt ständig popups die nervig sind.',
-      description2: 'Ich möchte hiermit jedem Menschen die Möglichkeit geben seine Arbeitszeit festzuhalten daher ich der Meinung bin, dass es eine essenzielle Notwendigkeit ist seine Arbeitszeit in Hinsicht auf Betrug durch den Arbeitgeber selbst festzuhalten. Vor allem in kleinen Betrieben wo Korruption nicht gerade so unwirklich ist.',
+      description1: 'WorkTime ist eine einfache Anwendung zur Erfassung von Arbeitszeiten. Sie ermöglicht es dir, deine täglichen Arbeitszeiten aufzuzeichnen, Pausen zu erfassen und Berichte zu exportieren.',
+      description2: 'Die App speichert alle Daten lokal in deinem Browser und funktioniert auch offline. Du kannst deine Arbeitszeiten als CSV oder PDF exportieren, um sie für deine persönlichen Aufzeichnungen oder zur Vorlage bei deinem Arbeitgeber zu verwenden.',
       version: 'Version 1.0.0',
       close: 'Schließen',
     },
@@ -176,8 +176,8 @@ const translations = {
     },
     about: {
       title: 'About WorkTime',
-      description1: 'This is an app I created to track my working hours, without having to manually record them elsewhere. I\'m sure similar apps exist, but as is often the case, other apps require payment or display annoying popups.',
-      description2: 'With this app, I want to give everyone the opportunity to track their working hours, as I believe it is essential to keep your own records to protect yourself from potential employer fraud. This is especially important in small businesses where corruption is not uncommon.',
+      description1: 'WorkTime is a simple application for tracking working hours. It allows you to record your daily working times, track breaks, and export reports.',
+      description2: 'The app stores all data locally in your browser and works offline. You can export your working times as CSV or PDF for your personal records or to submit to your employer.',
       version: 'Version 1.0.0',
       close: 'Close',
     },
